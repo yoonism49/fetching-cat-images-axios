@@ -35,7 +35,7 @@ class Home extends Component {
 
 	render() {
 		return (
-			<div className="container" style={{marginLeft:'260'}}>
+			<div className="container" style={{marginLeft:'260px'}}>
 			<SearchText
 					user={this.state.user}
 					onChange={this.updateSearch}
