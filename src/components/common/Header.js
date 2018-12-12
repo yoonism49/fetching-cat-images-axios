@@ -9,7 +9,7 @@ const Header = () => {
 		>
 			<Menu.Item key="app">
 				<IndexLink to="/">
-					<Icon type="appstore" />Git Repo Search Home
+					<Icon type="appstore" />Cat API Example!
 				</IndexLink>
 			</Menu.Item>
 		</Menu>

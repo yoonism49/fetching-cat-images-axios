@@ -1,5 +1,6 @@
 export default {
-	repos: [],
-	user: 'yoonism49',
-	single: ''
+	cats: [],
+	categories: [],
+	fav: [],
+	user:'yoonism49'
 };

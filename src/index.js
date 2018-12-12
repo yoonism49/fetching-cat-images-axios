@@ -5,20 +5,25 @@ import { Provider } from 'react-redux';
 
 import routes from './routes';
 import configureStore from './store/configureStore';
-import { loadRepos } from './actions/reposAction';
+import { loadCategory } from './actions/categoryAction';
 
 let currentValue;
 function handleChange() {
 	let previousValue = currentValue;
-	currentValue = store.getState().user;
+	currentValue = store.getState().key;
 
 	if (previousValue !== currentValue) {
-		store.dispatch(loadRepos(store.getState().user));
+		store.dispatch(loadCategory());
 	}
 }
 
 const store = configureStore();
-store.dispatch(loadRepos(store.getState().user));
+
+store.subscribe(() =>
+  localStorage.setItem('TOKEN',  'd121b1cc-651b-47e1-9341-66860f487b09')
+);
+store.dispatch(loadCategory());
+
 store.subscribe(handleChange);
 
 render(

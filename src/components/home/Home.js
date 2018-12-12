@@ -3,48 +3,57 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { List } from 'antd';
-import * as userActions from '../../actions/userAction';
-import Repo from './Repo';
-import SearchText from './SearchText';
-
+import * as categoryAction from '../../actions/categoryAction';
+import * as catsAction from '../../actions/catsAction';
+import * as favAction from '../../actions/favAction';
+import Cats from './Cats';
+import Categories from './Category';
 class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			user: ""
+			categoryId: "",
+			catList:[]
 		};
-		this.updateSearch = this.updateSearch.bind(this);
-		this.saveSearch = this.saveSearch.bind(this);
+		this.updateCategory = this.updateCategory.bind(this);
+		this.pickFavorite = this.pickFavorite.bind(this);
+		this.repoRow = this.repoRow.bind(this);
+	}
+	updateCategory(e) {
+		let cat = e;
+		this.setState({ categoryId: cat });
+		if(e !== 'favorite') {
+			this.props.actions.loadCats(cat);
+			this.setState({catList:'cat'});
+		} else {
+			this.props.actions.loadFavoriteCats();
+			this.setState({catList:'fav'});
+		}
+
 	}
 
-	updateSearch(e) {
-		let user = e.target.value;
-		return this.setState({ user: user });
+	pickFavorite(id) {
+		this.props.actions.postFavorite(id);
+		// this.props.actions.loadCats(this.state.user);
 	}
 
-	saveSearch(e) {
-		e.preventDefault();
-		this.props.actions.loadUser(this.state.user);
-	}
-
-	repoRow(repo, index) {
+	repoRow(cat, index) {
 		return (
-			<List.Item key={index}><Repo key={repo.id} repo={repo} /></List.Item>
+			<List.Item key={index} ><Cats key={this.state.catList==='cat'?cat.id:cat.image.id} cat={this.state.catList==='cat'?cat:cat.image} onClick={this.pickFavorite}/></List.Item>
 		);
 	}
 
 	render() {
 		return (
 			<div className="container" style={{marginLeft:'260px'}}>
-			<SearchText
-					user={this.state.user}
-					onChange={this.updateSearch}
-					onSave={this.saveSearch}
+			<Categories
+					categories={this.props.categories}
+					onChange={this.updateCategory}
 				/>
 				<List
-					header={<div>Repository List</div>}
+					header={<div>Cat Images</div>}
 					bordered
-					dataSource={this.props.repos}
+					dataSource={this.state.catList==='cat'?this.props.cats:this.props.fav}
 					renderItem={this.repoRow}
 				/>
 				
@@ -54,21 +63,24 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-	repos: PropTypes.array.isRequired,
-	user: PropTypes.string.isRequired,
+	categories: PropTypes.array.isRequired,
+	cats: PropTypes.array.isRequired,
+	fav: PropTypes.array.isRequired,
 	actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
 	return {
 		repos: state.repos,
-		user: state.user
+		categories: state.categories,
+		cats: state.cats,
+		fav: state.fav
 	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		actions: bindActionCreators(userActions, dispatch),
+		actions: bindActionCreators(Object.assign({}, categoryAction, catsAction, favAction), dispatch)
 	};
 }
 

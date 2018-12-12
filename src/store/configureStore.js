@@ -8,7 +8,7 @@ function configureStoreProd(initialState) {
     thunk,
   ];
 
-  return createStore(rootReducer, initialState, compose(
+  return createStore(rootReducer,{...initialState}, compose(
     applyMiddleware(...middlewares, logger)
     )
   );
@@ -21,7 +21,7 @@ function configureStoreDev(initialState) {
   ];
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; 
-  const store = createStore(rootReducer, initialState, composeEnhancers(
+  const store = createStore(rootReducer, {...initialState}, composeEnhancers(
     applyMiddleware(...middlewares, logger)
     )
   );

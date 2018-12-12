@@ -1,12 +1,12 @@
 {
-  "name": "fetching-gui-api-redux",
+  "name": "fetching-cat-images-axios",
   "version": "0.1.0",
   "description": "",
   "engines": {
     "node": "8.1.4",
     "yarn": "0.27.5"
   },
-  "homepage": "https://github.com/yoonism49/fetching-gui-api-redux",
+  "homepage": "https://github.com/yoonism49/fetching-cat-images-axios",
   "scripts": {
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm-run-all --parallel start-message",
@@ -27,7 +27,7 @@
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js"
   },
-  "author": "Daniel Deutsch",
+  "author": "Daniel Yoon",
   "dependencies": {
     "antd": "3.8.2",
     "antd-init": "2.0.6",

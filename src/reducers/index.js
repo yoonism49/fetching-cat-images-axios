@@ -1,13 +1,12 @@
 import { combineReducers } from 'redux';
 
-import repos from './reposReducer';
-import user from './userReducer';
-import single from './singleReducer';
-
+import categories from './categoryReducer';
+import cats from './catsReducer';
+import fav from './favReducer';
 const rootReducer = combineReducers({
-	repos,
-	user,
-	single
+	categories,
+	cats,
+	fav
 });
 
 export default rootReducer;
