@@ -36,7 +36,7 @@ class Categories extends Component {
               })
             }
             <Menu.Item key="favorite">
-              <Icon type="fire" />Favorite
+              <Icon type="gitlab" />Favorite
             </Menu.Item>
           </Menu>
         </div>
